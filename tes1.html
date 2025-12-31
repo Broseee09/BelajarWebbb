@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  height:100vh;
+  background:radial-gradient(circle at bottom,#0a1a2f,#000);
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+}
+
+/* BINTANG */
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite
+}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* KEMBANG API */
+.firework{
+  position:absolute;
+  width:6px;height:6px;
+  border-radius:50%;
+  animation:explode 1.5s ease-out forwards
+}
+@keyframes explode{
+  from{transform:scale(0);opacity:1}
+  to{transform:scale(4);opacity:0}
+}
+
+/* TEKS */
+.center{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  z-index:10;
+  width:90%
+}
+.center h1{
+  font-size:2.6em;
+  animation:glow 2s infinite alternate
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #ff4dd2}
+  to{text-shadow:0 0 30px #ff99e6}
+}
+.center p{
+  margin-top:15px;
+  font-size:1.1em
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff4dd2;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(255,77,210,.6)
+}
+
+/* LOVE */
+.heart{
+  position:absolute;
+  color:pink;
+  animation:floatUp 6s linear infinite;
+  opacity:.7
+}
+@keyframes floatUp{
+  from{transform:translateY(0)}
+  to{transform:translateY(-100vh);opacity:0}
+}
+
+/* MODAL VIDEO */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99
+}
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:35px;
+  cursor:pointer
+}
+
+/* VIDEO 1:1 */
+.video-box{
+  width:90%;
+  max-width:360px;
+  aspect-ratio:1/1;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,77,210,.6)
+}
+.video-box video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+footer{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+  font-size:.9em;
+  opacity:.7
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <h1>🎆 Selamat Tahun Baru Meylani 🎆</h1>
+  <p>
+    Terima kasih sudah selalu ada, semoga di tahun 2026 ini<br>
+    apa yang kamu harapin terkabulkan mei 💕<br>
+    Walaupun kita belum lama kenal,<br>
+    tapi aku senang banget bisa kenal kamu ✨
+  </p>
+
+  <button id="openVideo">🎬 Lihat Video</button>
+</div>
+
+<footer>❤️ Dear Boe To Meylani ❤️</footer>
+
+<!-- MODAL VIDEO -->
+<div id="videoModal" class="modal">
+  <span class="close" onclick="closeVideo()">&times;</span>
+  <div class="video-box">
+    <video id="myVideo" controls autoplay>
+      <source src="p.mp4" type="video/mp4">
+      Browser kamu tidak mendukung video
+    </video>
+  </div>
+</div>
+
+<script>
+/* BINTANG */
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.top=Math.random()*100+'vh';
+  s.style.left=Math.random()*100+'vw';
+  document.body.appendChild(s);
+}
+
+/* KEMBANG API */
+setInterval(()=>{
+  for(let i=0;i<20;i++){
+    const f=document.createElement('div');
+    f.className='firework';
+    f.style.background=`hsl(${Math.random()*360},100%,70%)`;
+    f.style.left=Math.random()*100+'vw';
+    f.style.top=Math.random()*60+'vh';
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1500);
+  }
+},2500);
+
+/* LOVE */
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.bottom='-20px';
+  h.style.fontSize=(Math.random()*20+15)+'px';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},800);
+
+/* VIDEO */
+const videoModal=document.getElementById('videoModal');
+const video=document.getElementById('myVideo');
+
+document.getElementById('openVideo').onclick=()=>{
+  video.currentTime=0;
+  video.play();
+  videoModal.style.display='flex';
+}
+function closeVideo(){
+  video.pause();
+  videoModal.style.display='none';
+}
+</script>
+
+</body>
+</html>
